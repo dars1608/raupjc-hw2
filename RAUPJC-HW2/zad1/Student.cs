@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace zad1
 {
-    class Student
+    public class Student
     {
         public string Name { get; set; }
         public string Jmbag { get; set; }
