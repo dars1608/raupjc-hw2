@@ -11,7 +11,7 @@ namespace zad4
     {
         public static string[] Linq1(int[] intArray)
         {
-            return intArray.GroupBy()
+            return intArray.GroupBy(i => i).OrderBy(i=>i.First()).Select(i => $"Broj {i.First()} ponavlja se {i.Count()} puta").ToArray();
         }
 
         public static University[] Linq2_1(University[] universityArray)
@@ -21,20 +21,21 @@ namespace zad4
 
         public static University[] Linq2_2(University[] universityArray)
         {
-            throw new NotImplementedException();
+            return universityArray.Where(i => i.Students.Count() < universityArray.Average(i => i.Students.Count())).ToArray();
         }
 
         public static Student[] Linq2_3(University[] universityArray)
         {
-            throw new NotImplementedException();
+            return universityArray.SelectMany(i => i.Students).Distinct().ToArray();
         }
         public static Student[] Linq2_4(University[] universityArray)
         {
-            throw new NotImplementedException();
+            return universityArray.Where(u => u.Students.All(s => s.Gender.Equals(Gender.Male) || s.Gender.Equals(Gender.Female)))
+                .SelectMany(i => i.Students.Select(j => j)).Distinct().ToArray();
         }
         public static Student[] Linq2_5(University[] universityArray)
         {
-            throw new NotImplementedException();
+            return universityArray.SelectMany(i => i.Students.Where(j => universityArray.Where(k => k.Students.Contains(j)).Count() > 1)).Distinct().ToArray();
         }
     }
 }
