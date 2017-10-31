@@ -67,6 +67,7 @@ namespace zad2
 
         public List<TodoItem> GetFiltered(Func<TodoItem, bool> filterFunction)
         {
+            if (_inMemoryTodoDatabase.Count == 0) return null;
             return _inMemoryTodoDatabase.Where(t => filterFunction(t)).ToList();
         }
 
