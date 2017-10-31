@@ -11,15 +11,9 @@ namespace zad2.Tests
     [TestClass()]
     public class TodoRepositoryTests
     {
-        [TestMethod()]
-        public void TodoRepositoryTest()
-        {
-            TodoRepository t = new TodoRepository();
-            Assert.IsNull(t.GetAll());
-        }
 
         [TestMethod()]
-        public void TodoRepositoryTest2()
+        public void TodoRepositoryTest()
         {
             GenericList<TodoItem> l = new GenericList<TodoItem>(5);
             for (int i = 0; i < 5; i++)
@@ -46,6 +40,7 @@ namespace zad2.Tests
         {
             TodoRepository t = new TodoRepository();
             TodoItem td = new TodoItem("prvi");
+            t.Add(td);
             Assert.AreEqual(t.Get(td.Id), td);
         }
 
@@ -98,7 +93,15 @@ namespace zad2.Tests
         [TestMethod()]
         public void GetFilteredTest()
         {
-            TodoRepository t = new TodoRepository();
+            GenericList<TodoItem> l = new GenericList<TodoItem>(5);
+            for (int i = 0; i < 5; i++)
+            {
+                l.Add(new TodoItem("" + (i + 1)));
+            }
+            TodoRepository t = new TodoRepository(l);
+            List<TodoItem> l1 = t.GetFiltered(i => i.Text.Equals(("2")));
+            List<TodoItem> l2 = l.Where(i => i.Text.Equals("2")).ToList();
+            Assert.AreEqual(l1[0], l2[0]);
         }
 
         [TestMethod()]

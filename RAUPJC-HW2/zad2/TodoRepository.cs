@@ -44,10 +44,13 @@ namespace zad2
 
         public TodoItem Get(Guid todoId)
         {
-            return _inMemoryTodoDatabase.Where(t => t.Id == todoId).FirstOrDefault();
+            if (_inMemoryTodoDatabase.Count == 0) return null;
+            return _inMemoryTodoDatabase.FirstOrDefault(t => t.Id == todoId);
         }
 
         public List<TodoItem> GetActive()
+
+
         {
             return _inMemoryTodoDatabase.Where(t => t.IsCompleted == false).ToList();
         }
@@ -70,13 +73,13 @@ namespace zad2
         public bool MarkAsCompleted(Guid todoId)
         {
             if (_inMemoryTodoDatabase.Count == 0 || this.Get(todoId) == null) return false;
-            return _inMemoryTodoDatabase.Where(t => t.Id == todoId).First().MarkAsCompleted();
+            return _inMemoryTodoDatabase.First(t => t.Id.Equals(todoId)).MarkAsCompleted();
         }
 
         public bool Remove(Guid todoId)
         {
             if (_inMemoryTodoDatabase.Count == 0 || this.Get(todoId) == null) return false;
-            return _inMemoryTodoDatabase.Remove(_inMemoryTodoDatabase.Where(t => t.Id == todoId).First());
+            return _inMemoryTodoDatabase.Remove(_inMemoryTodoDatabase.First(t => t.Id==todoId));
         }
 
         public TodoItem Update(TodoItem todoItem)
@@ -85,7 +88,7 @@ namespace zad2
             {
                 return this.Add(todoItem);
             }
-            _inMemoryTodoDatabase.Remove(_inMemoryTodoDatabase.Where(t => t.Id == todoItem.Id).First());
+            _inMemoryTodoDatabase.Remove(todoItem);
             return this.Add(todoItem);
 
         }
