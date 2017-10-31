@@ -21,7 +21,7 @@ namespace zad4
 
         public static University[] Linq2_2(University[] universityArray)
         {
-            return universityArray.Where(i => i.Students.Count() < universityArray.Average(i => i.Students.Count())).ToArray();
+            return universityArray.Where(i => i.Students.Count() < universityArray.Average(j => j.Students.Count())).ToArray();
         }
 
         public static Student[] Linq2_3(University[] universityArray)
