@@ -30,7 +30,7 @@ namespace zad4
         }
         public static Student[] Linq2_4(University[] universityArray)
         {
-            return universityArray.Where(u => u.Students.All(s => s.Gender.Equals(Gender.Male) || s.Gender.Equals(Gender.Female)))
+            return universityArray.Where(u => u.Students.All(s => s.Gender.Equals(Gender.Male)) || u.Students.All(s => s.Gender.Equals(Gender.Female)))
                 .SelectMany(i => i.Students.Select(j => j)).Distinct().ToArray();
         }
         public static Student[] Linq2_5(University[] universityArray)
