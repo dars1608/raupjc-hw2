@@ -35,6 +35,16 @@ namespace zad2.Tests
             Assert.AreEqual(t.Add(td), td);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(DuplicateTodoItemException))]
+        public void AddTest2()
+        {
+            TodoRepository t = new TodoRepository();
+            TodoItem td = new TodoItem("prvi");
+            t.Add(td);
+            t.Add(td);
+        }
+
         [TestMethod()]
         public void GetTest()
         {
